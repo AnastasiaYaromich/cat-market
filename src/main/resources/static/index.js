@@ -22,19 +22,42 @@ angular.module('catmarket', []).controller('indexController', function ($scope, 
                 });
     }
 
-    $scope.addProductToCart = function(id) {
-       $http.post('http://localhost:8189/catmarket/api/v1/cart/' + id)
+          $scope.addProductToCart = function(id) {
+             $http.get('http://localhost:8189/catmarket/api/v1/cart/add/' + id)
+                        .then(function (response) {
+                             $scope.fillCartTable();
+                             });
+            }
+
+                    $scope.deleteProductInCart = function(id) {
+                         $http.delete('http://localhost:8189/catmarket/api/v1/cart/delete/' + id)
+                                    .then(function (response) {
+                                         $scope.fillCartTable();
+                                         });
+                        }
+
+
+
+                  $scope.fillCartTable = function() {
+                            $http.get('http://localhost:8189/catmarket/api/v1/cart')
+                                      .then(function (response) {
+                                      $scope.cartItems = response.data.items;
+                                      $scope.totalPrice = response.data.totalPrice;
+                                      });
+                        }
+
+        $scope.deleteAllItemsInCart = function() {
+         $http.delete('http://localhost:8189/catmarket/api/v1/cart/deleteAll')
                     .then(function (response) {
                          $scope.fillCartTable();
                          });
-    }
+        }
 
-         $scope.fillCartTable = function () {
-                $http.get('http://localhost:8189/catmarket/api/v1/cart')
-                    .then(function (response) {
-                    $scope.productsInCart = response.data;
-                    });
-            }
-             $scope.fillCartTable();
+
+
+
+
+
+    $scope.fillCartTable();
     $scope.fillTable();
 });

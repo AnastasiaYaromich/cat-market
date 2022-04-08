@@ -1,34 +1,37 @@
 package com.yaromich.catmarket.services;
 
-import com.yaromich.catmarket.entities.Cart;
 import com.yaromich.catmarket.entities.Product;
-import com.yaromich.catmarket.repositories.CartRepository;
+import com.yaromich.catmarket.exceptions.ResourceNotFoundException;
+import com.yaromich.catmarket.utils.Cart;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class CartService {
-    private final CartRepository cartRepository;
     private final ProductService productService;
+    private Cart cart;
 
-    public void addProductToCart(Long id) {
-        Product product = productService.findProductById(id);
-        Cart cart = new Cart();
-        cart.setProduct(product);
-        cartRepository.save(cart);
+    @PostConstruct
+    public void init() {
+        cart = new Cart();
+        cart.setItems(new ArrayList<>());
     }
 
-    public List<Product> findAllProductsInCart() {
-        List<Cart> carts = cartRepository.findAll();
-        List<Product> products = new ArrayList<>();
-        for (Cart cart: carts) {
-            products.add(cart.getProduct());
-        }
-        return products;
+    public Cart getCurrentCart() {
+        return cart;
+    }
+
+    public void addToCart(Long productId) {
+        Product p = productService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Продукт с id: " + productId + " не найден"));
+        cart.add(p);
+    }
+
+    public void deleteFromCart(Long productId) {
+        Product p = productService.findById(productId).orElseThrow(() -> new ResourceNotFoundException("Продукт с id: " + productId + " не найден"));
+        cart.delete(p);
     }
 }
