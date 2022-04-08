@@ -12,7 +12,6 @@ public class CatMarketApplication {
 	// 3. Реализуйте очистку корзины с фронта +
 	// 4. Реализуйте возможность на фронте добавлять продукты в корзину +
 	// *. С помощью кнопок +/- менять количество товаров в одной записи +
-
 	public static void main(String[] args) {
 		SpringApplication.run(CatMarketApplication.class, args);
 	}
