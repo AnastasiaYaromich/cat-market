@@ -55,8 +55,20 @@ angular.module('catmarket', []).controller('indexController', function ($scope, 
 
 
 
+        $scope.userAuthService = function() {
+        $http.post('http://localhost:8189/catmarket/auth', $scope.userAuth)
+                    .then(function (response) {
+//                             $scope.getMyEmail();
+                                        $scope.token = response.data;
+                        });
+        }
 
-
+   $scope.getMyEmail = function() {
+        $http.get('http://localhost:8189/catmarket/auth/get_my_email')
+                    .then(function (response) {
+                          $scope.email = response.data;
+                        });
+        }
 
     $scope.fillCartTable();
     $scope.fillTable();

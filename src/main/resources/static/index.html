@@ -18,7 +18,25 @@
 
      <p></p>
     <h1>Cat Market</h1>
-    <p>
+    <p></p>
+    <br>
+
+    <form class="row g-3" ng-submit="userAuthService()">
+        <div class="col-auto">
+            <input type="text" class="form-control" id="userAuthName" ng-model="userAuth.username" placeholder="Логин">
+        </div>
+        <div class="col-auto">
+            <input type="password" class="form-control" id="userAuthPassword" ng-model="userAuth.password" placeholder="Пароль">
+        </div>
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary mb-3">Войти</button>
+        </div>
+        <p>Email: {{email}}</p>
+    </form>
+
+
+
+
 
     <h3>Добавить продукт</h3>
     <p></p>
