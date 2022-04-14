@@ -44,7 +44,6 @@ public class AuthController {
     @GetMapping("/get_my_email")
     public ResponseEntity<?> getEmail() {
         Optional<User> user = userService.findByUsername(principal.getName());
-
-        return ResponseEntity.ok(new JwtResponse(user.get().getEmail()));
+        return ResponseEntity.ok(user.get());
     }
 }

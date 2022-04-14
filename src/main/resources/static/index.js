@@ -66,7 +66,7 @@ angular.module('catmarket', []).controller('indexController', function ($scope, 
    $scope.getMyEmail = function() {
         $http.get('http://localhost:8189/catmarket/auth/get_my_email')
                     .then(function (response) {
-                     $scope.email = response.data;
+                     $scope.email = response.data.email;
                         });
         }
 
