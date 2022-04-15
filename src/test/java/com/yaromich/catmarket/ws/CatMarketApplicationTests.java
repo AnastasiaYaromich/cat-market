@@ -1,4 +1,4 @@
-package com.yaromich.catmarket;
+package com.yaromich.catmarket.ws;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
