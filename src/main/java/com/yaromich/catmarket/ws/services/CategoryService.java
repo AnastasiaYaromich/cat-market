@@ -2,8 +2,10 @@ package com.yaromich.catmarket.ws.services;
 
 import com.yaromich.catmarket.ws.entities.CategoryEntity;
 import com.yaromich.catmarket.ws.repositories.CategoryRepository;
+import com.yaromich.catmarket.ws.soap.categories.Category;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import java.util.function.Function;
 
 @Service
 @RequiredArgsConstructor

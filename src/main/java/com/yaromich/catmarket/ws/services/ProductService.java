@@ -2,9 +2,12 @@ package com.yaromich.catmarket.ws.services;
 
 import com.yaromich.catmarket.ws.entities.ProductEntity;
 import com.yaromich.catmarket.ws.repositories.ProductRepository;
+import com.yaromich.catmarket.ws.soap.products.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -17,7 +20,7 @@ public class ProductService {
         p.setId(se.getId());
         p.setTitle(se.getTitle());
         p.setPrice(se.getPrice());
-        p.setCategoryTitle(se.getCategory().getTitle());
+        p.setCategoryTitle(se.getCategories().getTitle());
         return p;
     };
 
@@ -26,7 +29,7 @@ public class ProductService {
     }
 
     public Product getByName(String name) {
-        return productRepository.findByName(name).map(functionEntityToSoap).get();
+        return productRepository.findByTitle(name).map(functionEntityToSoap).get();
     }
 
     public Product getById(Long id) {

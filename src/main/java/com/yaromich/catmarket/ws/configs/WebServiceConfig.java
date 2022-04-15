@@ -25,7 +25,7 @@ public class WebServiceConfig extends WsConfigurerAdapter  {
 
     // http://localhost:8081/ws/categories.wsdl
     @Bean(name = "categories")
-    public DefaultWsdl11Definition groupsWsdl11Definition(XsdSchema categoriesSchema) {
+    public DefaultWsdl11Definition categoriesWsdl11Definition(XsdSchema categoriesSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("CategoriesPort");
         wsdl11Definition.setLocationUri("/ws");
@@ -36,7 +36,7 @@ public class WebServiceConfig extends WsConfigurerAdapter  {
 
     // http://localhost:8081/ws/products.wsdl
     @Bean(name = "products")
-    public DefaultWsdl11Definition studentsWsdl11Definition(XsdSchema productsSchema) {
+    public DefaultWsdl11Definition productsWsdl11Definition(XsdSchema productsSchema) {
         DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
         wsdl11Definition.setPortTypeName("ProductsPort");
         wsdl11Definition.setLocationUri("/ws");
@@ -46,10 +46,10 @@ public class WebServiceConfig extends WsConfigurerAdapter  {
     }
 
     @Bean
-    public XsdSchema groupsSchema() { return new SimpleXsdSchema(new ClassPathResource("products.xsd")); }
+    public XsdSchema productsSchema() { return new SimpleXsdSchema(new ClassPathResource("products.xsd")); }
 
     @Bean
-    public XsdSchema studentsSchema() {
+    public XsdSchema categoriesSchema() {
         return new SimpleXsdSchema(new ClassPathResource("categories.xsd"));
     }
 }

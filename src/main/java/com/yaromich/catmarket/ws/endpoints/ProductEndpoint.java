@@ -1,6 +1,7 @@
 package com.yaromich.catmarket.ws.endpoints;
 
 import com.yaromich.catmarket.ws.services.ProductService;
+import com.yaromich.catmarket.ws.soap.products.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -10,32 +11,16 @@ import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 @Endpoint
 @RequiredArgsConstructor
 public class ProductEndpoint {
-    private static final String NAMESPACE_URI = "http://www.geekbrains.ru/products";
+    private static final String NAMESPACE_URI = "http://www.yaromich.com/catmarket/ws/products";
     private final ProductService productService;
-
-//    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:f="http://www.geekbrains.ru/products">
-//    <soapenv:Header/>
-//        <soapenv:Body>
-//            <f:getProductByNameRequest>
-//                <f:name>Bread</f:name>
-//            </f:getProductByNameRequest>
-//        </soapenv:Body>
-//    </soapenv:Envelope>
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getProductByNameRequest")
     @ResponsePayload
     public GetProductByNameResponse getProductByName(@RequestPayload GetProductByNameRequest request) {
         GetProductByNameResponse response = new GetProductByNameResponse();
-        response.setProduct(productService.getByName(request.getTitle()));
+        response.setProduct(productService.getByName(request.getName()));
         return response;
     }
-
-//    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:f="http://www.geekbrains.ru/products">
-//    <soapenv:Header/>
-//        <soapenv:Body>
-//            <f:getAllProductsRequest/>
-//        </soapenv:Body>
-//    </soapenv:Envelope>
 
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getAllProductsRequest")
     @ResponsePayload
@@ -46,15 +31,6 @@ public class ProductEndpoint {
     }
 
 
-    //    <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:f="http://www.geekbrains.ru/products">
-//    <soapenv:Header/>
-//        <soapenv:Body>
-//            <f:getProductByIdRequest>
-//                <f:id>1</f:id>
-//            </f:getProductByIdRequest>
-//        </soapenv:Body>
-//    </soapenv:Envelope>
-//
     @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getProductByIdRequest")
     @ResponsePayload
     public GetProductByIdResponse getProductById(@RequestPayload GetProductByIdRequest request) {
